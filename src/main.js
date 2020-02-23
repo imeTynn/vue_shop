@@ -12,9 +12,15 @@ import './assets/fonts/iconfont.css'
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(axios)
+axios.interceptors.request.use(config=>{
+  config.headers.authorization=window.sessionStorage.getItem("token")
+  //最后必须return config
+  return config
+})
 Vue.prototype.$http=axios
 // 配置请求的默认根路径
 axios.defaults.baseURL='http://127.0.0.1:8888/api/private/v1/'
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
